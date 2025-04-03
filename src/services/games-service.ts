@@ -16,6 +16,7 @@ export interface Games {
   background_image: string;
   // the type of parent_platforms is an array of objects, where each object has a signle property of type Platform
   parent_platforms: { platform: Platforms }[];
+  metacritic: number;
 }
 
 export interface FetchedGames {
