@@ -1,5 +1,6 @@
 import { Games } from "@/services/games-service";
-import { Card, Image } from "@chakra-ui/react";
+import { Card, Image, Text } from "@chakra-ui/react";
+import PlatformIconList from "./PlatformIconList";
 
 interface Props {
   game: Games;
@@ -11,6 +12,7 @@ function GameCard({ game }: Props) {
       <Image src={game.background_image} />
       <Card.Body>
         <Card.Title fontSize="1xl">{game.name}</Card.Title>
+        <PlatformIconList platform={game.parent_platforms}/>
       </Card.Body>
     </Card.Root>
   );
