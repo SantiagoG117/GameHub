@@ -6,22 +6,29 @@ import gamesService, { FetchedGames, Games } from "@/services/games-service";
 const useGames = () => {
   const [games, setGames] = useState<Games[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const { request, cancel } = gamesService.getAll<FetchedGames>();
+    setIsLoading(true);
 
+    //API call to fetch games data
+    const { request, cancel } = gamesService.getAll<FetchedGames>();
     request
-      .then((response) => setGames(response.data.results))
+      .then((response) => {
+        setGames(response.data.results);
+        setIsLoading(false);
+      })
       .catch((error) => {
         if (error instanceof CanceledError) return;
         setError(error.message);
+        setIsLoading(false);
       });
 
     //Cleanup function in case the fetched data is no longer needed
     return () => cancel();
   }, []);
 
-  return { games, error };
+  return { games, error, isLoading };
 };
 
 export default useGames;
