@@ -1,9 +1,8 @@
 import createService from "./http-service";
 
-//Module responsible for making HTTP requests to the /games endpoint
+//?Module responsible for making HTTP requests to the /games endpoint
 
-//Interfaces represent the shape of the response object returned by the API
-
+//?Interfaces represent the shape of the response object returned by the API
 export interface Platforms {
   id: number;
   name: string;
