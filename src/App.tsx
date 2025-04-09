@@ -2,6 +2,7 @@ import "./App.css";
 import { Grid, GridItem, Show, useBreakpointValue } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
+import GenreList from "./components/sideBar/GenreList";
 
 function App() {
   // hook that returns a boolean value based on the current screen size
@@ -18,7 +19,9 @@ function App() {
         <NavBar />
       </GridItem>
       <Show when={isAboveLg}>
-        <GridItem area="aside">Aside</GridItem>
+        <GridItem area="aside">
+          <GenreList />
+        </GridItem>
       </Show>
       <GridItem area="main">
         <GameGrid />

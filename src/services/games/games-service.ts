@@ -1,6 +1,6 @@
-import createService from "./http-service";
+import createService from "../http-service";
 
-//?Module responsible for making HTTP requests to the /games endpoint
+//?Service responsible for calling the the /games endpoint
 
 //?Interfaces represent the shape of the response object returned by the API
 export interface Platforms {
@@ -24,7 +24,7 @@ export interface FetchedGames {
 }
 
 /* 
-Takes the createService function imported from http-service to create an instance of 
+Calls the createService function imported from http-service to create an instance of 
 the HttpService class with an endpoint of /games. Then it exports this instance, which
 also contains the required interfaces.
 */

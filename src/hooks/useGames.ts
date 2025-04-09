@@ -1,7 +1,10 @@
 import apiClient from "@/services/api-client";
 import { CanceledError } from "axios";
 import { useEffect, useState } from "react";
-import gamesService, { FetchedGames, Games } from "@/services/games-service";
+import gamesService, {
+  FetchedGames,
+  Games,
+} from "@/services/games/games-service";
 
 const useGames = () => {
   const [games, setGames] = useState<Games[]>([]);
@@ -11,7 +14,7 @@ const useGames = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    //API call to fetch games data
+    //Call the service to fetch the games from the API
     const { request, cancel } = gamesService.getAll<FetchedGames>();
     request
       .then((response) => {
