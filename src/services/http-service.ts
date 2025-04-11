@@ -1,6 +1,6 @@
 import apiClient from "./api-client";
 
-//Custom service responsible for making http requests to a client API
+//?Custom service responsible for making http requests to a client API
 class HttpService {
   endPoint: string;
 

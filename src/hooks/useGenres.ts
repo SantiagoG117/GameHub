@@ -1,32 +1,14 @@
-import genreService, {
-  FetchedGenres,
-  Genres,
-} from "@/services/genres/genre-service";
-import { CanceledError } from "axios";
-import { useEffect, useState } from "react";
+import useData from "./useData";
 
-const useGenres = () => {
-  const [genres, setGenres] = useState<Genres[]>([]);
-  const [error, setError] = useState("");
+//? Custom Hook responsible for definining the endpoint for genres and the object returned by the API
+interface Genres {
+  id: number;
+  name: string;
+  slug: string;
+  games_count: number;
+  image_background: string;
+}
 
-  useEffect(() => {
-    //Call the service to fetch the genres from the API
-    const { request, cancel } = genreService.getAll<FetchedGenres>();
-
-    request
-      .then((response) => {
-        setGenres(response.data.results);
-      })
-      .catch((error) => {
-        if (error instanceof CanceledError) return;
-        setError(error.message);
-      });
-
-    //Cleanup function in case the fetched data is no longer needed
-    return () => cancel();
-  }, []);
-
-  return { genres, error };
-};
+const useGenres = () => useData<Genres>("/genres");
 
 export default useGenres;

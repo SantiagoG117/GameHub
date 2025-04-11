@@ -1,37 +1,23 @@
-import apiClient from "@/services/api-client";
-import { CanceledError } from "axios";
-import { useEffect, useState } from "react";
-import gamesService, {
-  FetchedGames,
-  Games,
-} from "@/services/games/games-service";
+//? Custom Hook responsible for definining the endpoint for games and the object returned by the API
 
-const useGames = () => {
-  const [games, setGames] = useState<Games[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+import useData from "./useData";
 
-  useEffect(() => {
-    setIsLoading(true);
+interface Platforms {
+  id: number;
+  name: string;
+  slug: string;
+}
 
-    //Call the service to fetch the games from the API
-    const { request, cancel } = gamesService.getAll<FetchedGames>();
-    request
-      .then((response) => {
-        setGames(response.data.results);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        if (error instanceof CanceledError) return;
-        setError(error.message);
-        setIsLoading(false);
-      });
+interface Games {
+  id: number;
+  name: string;
+  background_image: string;
+  // the type of parent_platforms is an array of objects, where each object has a signle property of type Platform
+  parent_platforms: { platform: Platforms }[];
+  metacritic: number;
+}
 
-    //Cleanup function in case the fetched data is no longer needed
-    return () => cancel();
-  }, []);
+const useGames = () => useData<Games>("/games");
 
-  return { games, error, isLoading };
-};
 
 export default useGames;
