@@ -8,7 +8,7 @@ interface Platforms {
   slug: string;
 }
 
-interface Games {
+export interface Games {
   id: number;
   name: string;
   background_image: string;
@@ -18,6 +18,5 @@ interface Games {
 }
 
 const useGames = () => useData<Games>("/games");
-
 
 export default useGames;

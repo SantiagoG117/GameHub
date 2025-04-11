@@ -6,20 +6,14 @@
     This functionality allow us to optimize images that are too big for our needs.
 */
 
-const getCroppedImageUrl = (url: string, height: string, weidth: string) => {
+const getCroppedImageUrl = (url: string) => {
   const target = "media/";
   const index = url.indexOf(target) + target.length; // Get the index of the end of the media/ string
 
   if (index === -1) return url; // If media/ is not found, return the original URL
 
   return (
-    url.slice(0, index) +
-    "crop/" +
-    height +
-    "/" +
-    weidth +
-    "/" +
-    url.slice(index) //Get the remaining characters of the URL
+    url.slice(0, index) + "crop/600/400/" + url.slice(index) //Get the remaining characters of the URL
   );
 };
 
