@@ -1,7 +1,7 @@
 import "./App.css";
 import { Grid, GridItem, Show, useBreakpointValue } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
-import GameGrid from "./components/GameGrid";
+import GameGrid from "./components/gameCard/GameGrid";
 import GenreList from "./components/sideBar/GenreList";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
       templateAreas={{
         base: `"nav" "main"`, //Scenario for small screens
         lg: `"nav nav" "aside main"`, // Scenario for large screens
-      }} 
+      }}
       /* Defines the width of the Grid's columns */
       templateColumns={{
         base: "1fr", //A Single column streching accross all the available space
