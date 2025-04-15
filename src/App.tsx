@@ -29,7 +29,7 @@ function App() {
       <Show when={isAboveLg}>
         <GridItem area="aside" paddingX={5}>
           {/* App component is notified by the GenreList component that a Genre was selected and receives it */}
-          <GenreList onSelectedGenre={(genre) => setSelectedGenre(genre)} />
+          <GenreList onSelectedGenre={(genre) => setSelectedGenre(genre)} selectedGenre={selectedGenre} />
         </GridItem>
       </Show>
       <GridItem area="main">
