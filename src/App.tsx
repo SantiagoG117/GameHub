@@ -3,8 +3,11 @@ import { Grid, GridItem, Show, useBreakpointValue } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/gameCard/GameGrid";
 import GenreList from "./components/sideBar/GenreList";
+import { useState } from "react";
+import { Genres } from "./hooks/useGenres";
 
 function App() {
+  const [selectedGenre, setSelectedGenre] = useState<Genres | null>(null);
   // hook that returns a boolean value based on the current screen size
   const isAboveLg = useBreakpointValue({ base: false, lg: true }); //Values for a screen bigger than 1024px
 
@@ -25,11 +28,12 @@ function App() {
       </GridItem>
       <Show when={isAboveLg}>
         <GridItem area="aside" paddingX={5}>
-          <GenreList />
+          {/* App component is notified by the GenreList component that a Genre was selected and receives it */}
+          <GenreList onSelectedGenre={(genre) => setSelectedGenre(genre)} />
         </GridItem>
       </Show>
       <GridItem area="main">
-        <GameGrid />
+        <GameGrid selectedGenre={selectedGenre} />
       </GridItem>
     </Grid>
   );

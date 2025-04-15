@@ -1,7 +1,7 @@
 import useData from "./useData";
 
 //? Custom Hook responsible for definining the endpoint for genres and the object returned by the API
-interface Genres {
+export interface Genres {
   id: number;
   name: string;
   slug: string;
