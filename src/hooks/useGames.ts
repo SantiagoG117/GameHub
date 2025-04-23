@@ -2,12 +2,7 @@
 
 import useData from "./useData";
 import { Genres } from "./useGenres";
-
-export interface Platforms {
-  id: number;
-  name: string;
-  slug: string;
-}
+import { Platforms } from "./usePlatforms";
 
 export interface Games {
   id: number;
@@ -18,17 +13,26 @@ export interface Games {
   metacritic: number;
 }
 
-const useGames = (selectedGenre: Genres | null) =>
+const useGames = (
+  selectedGenre: Genres | null,
+  selectedPlatform: Platforms | null
+) =>
   /* 
     To filter games by genre we have to pass genre as a query string parameter
       - A query string parameter is a key-value pair appended to the URL of an HTTP request to pass additional
       information to the server. 
-      - RAWG API specifies the genres query string as a number object
+      - RAWG API specifies the genres and parent_platforms query string parameters as number objects 
       - params is one of the properties of the AxiosRequestConfig object
   */
   useData<Games>(
-    "/games", 
-    { params: {genres: selectedGenre?.id}}, [selectedGenre?.id]
+    "/games",
+    {
+      params: {
+        genres: selectedGenre?.id,
+        parent_platforms: selectedPlatform?.id,
+      },
+    },
+    [selectedGenre?.id, selectedPlatform?.id]
   );
 
 export default useGames;
