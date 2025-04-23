@@ -1,5 +1,6 @@
 //? Custom Hook responsible for definining the endpoint for games and the object returned by the API
 
+import { GameQuery } from "@/App";
 import useData from "./useData";
 import { Genres } from "./useGenres";
 import { Platforms } from "./usePlatforms";
@@ -14,8 +15,7 @@ export interface Games {
 }
 
 const useGames = (
-  selectedGenre: Genres | null,
-  selectedPlatform: Platforms | null
+  gameQuery: GameQuery
 ) =>
   /* 
     To filter games by genre we have to pass genre as a query string parameter
@@ -28,11 +28,11 @@ const useGames = (
     "/games",
     {
       params: {
-        genres: selectedGenre?.id,
-        parent_platforms: selectedPlatform?.id,
+        genres: gameQuery.genre?.id,
+        parent_platforms: gameQuery.platform?.id,
       },
     },
-    [selectedGenre?.id, selectedPlatform?.id]
+    [gameQuery] // Any change in the gameQuery object React will re-fresh the data with the new filters
   );
 
 export default useGames;
