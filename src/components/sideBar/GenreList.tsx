@@ -13,6 +13,7 @@ function GenreList({ onSelectedGenre, selectedGenre }: Props) {
   const skeletons = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ];
+
   if (error) return;
 
   return (
@@ -26,32 +27,33 @@ function GenreList({ onSelectedGenre, selectedGenre }: Props) {
       )}
 
       <List.Root listStyleType="none">
-        {data.map((genre) => (
-          <List.Item key={genre.id} padding="5px">
-            <HStack>
-              <Image
-                src={getCroppedImageUrl(genre.image_background)}
-                boxSize="32px"
-                borderRadius={8}
-              />
-              <Button
-                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
-                color={
-                  genre.id === selectedGenre?.id ? "yellow.400" : undefined
-                }
-                variant="ghost"
-                fontSize={"lg"}
-                padding={1}
-                /* 
-                The button sends the genre to the parent component (App.tsx)
-                */
-                onClick={() => onSelectedGenre(genre)}
-              >
-                {genre.name}
-              </Button>
-            </HStack>
-          </List.Item>
-        ))}
+        {data
+          .sort((a, b) => a.name.localeCompare(b.name)) // Sort by name in ascending order
+          .map((genre) => (
+            <List.Item key={genre.id} padding="5px">
+              <HStack>
+                <Image
+                  src={getCroppedImageUrl(genre.image_background)}
+                  boxSize="32px"
+                  borderRadius={8}
+                />
+                <Button
+                  fontWeight={
+                    genre.id === selectedGenre?.id ? "bold" : "normal"
+                  }
+                  color={
+                    genre.id === selectedGenre?.id ? "yellow.400" : undefined
+                  }
+                  variant="ghost"
+                  fontSize={"lg"}
+                  padding={1}
+                  onClick={() => onSelectedGenre(genre)}
+                >
+                  {genre.name}
+                </Button>
+              </HStack>
+            </List.Item>
+          ))}
       </List.Root>
     </>
   );

@@ -1,6 +1,5 @@
 import { AxiosRequestConfig, CanceledError } from "axios";
 import { useEffect, useState } from "react";
-import { Genres } from "./useGenres";
 import apiClient from "@/services/api-client";
 
 interface FetchedData<T> {
@@ -24,7 +23,7 @@ const useData = <T>(
   useEffect(
     () => {
       // Call the service to fetch the data from the API
-      const controller = new AbortController(); //Built-in class in browswers that allows to cancel asynchronous operations like get http requests
+      const controller = new AbortController(); //Built-in class in browsers that allows to cancel asynchronous operations like get http requests
 
       setIsLoading(true);
 
