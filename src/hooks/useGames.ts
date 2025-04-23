@@ -26,6 +26,9 @@ const useGames = (selectedGenre: Genres | null) =>
       - RAWG API specifies the genres query string as a number object
       - params is one of the properties of the AxiosRequestConfig object
   */
-  useData<Games>("/games", { params: {genres: selectedGenre?.id}}, [selectedGenre?.id]);
+  useData<Games>(
+    "/games", 
+    { params: {genres: selectedGenre?.id}}, [selectedGenre?.id]
+  );
 
 export default useGames;
