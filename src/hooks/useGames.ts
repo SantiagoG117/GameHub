@@ -14,9 +14,7 @@ export interface Games {
   metacritic: number;
 }
 
-const useGames = (
-  gameQuery: GameQuery
-) =>
+const useGames = (gameQuery: GameQuery) =>
   /* 
     To filter games by genre we have to pass genre as a query string parameter
       - A query string parameter is a key-value pair appended to the URL of an HTTP request to pass additional
@@ -30,6 +28,7 @@ const useGames = (
       params: {
         genres: gameQuery.genre?.id,
         parent_platforms: gameQuery.platform?.id,
+        ordering: gameQuery.sortOrder?.value,
       },
     },
     [gameQuery] // Any change in the gameQuery object React will re-fresh the data with the new filters

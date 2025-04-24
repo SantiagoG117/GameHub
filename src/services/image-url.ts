@@ -7,6 +7,7 @@
 */
 
 const getCroppedImageUrl = (url: string) => {
+  if (!url) return "";
   const target = "media/";
   const index = url.indexOf(target) + target.length; // Get the index of the end of the media/ string
 

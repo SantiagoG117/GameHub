@@ -19,6 +19,7 @@ import OrderBySelector from "./components/gameGrid/OrderBySelector";
 export interface GameQuery {
   genre: Genres | null;
   platform: Platforms | null;
+  sortOrder: {value: string, label: string};
 }
 
 function App() {
@@ -57,7 +58,7 @@ function App() {
 
       {/* Game card grid */}
       <GridItem area="main">
-        <HStack spaceX={2} paddingLeft={2} >
+        <HStack spaceX={2} paddingLeft={2}>
           <PlatformSelector
             /*App component is notified by the PlatformSelector that a platform was selected and receives it  */
             onSelectedPlatform={(platform) =>
@@ -66,7 +67,12 @@ function App() {
             // The parent component sends the current state of the selectedPlatform back to the Platform component
             selectedPlatform={gameQuery.platform}
           />
-          <OrderBySelector />
+          <OrderBySelector
+            onSelectedSortOrder={(sortOrder) =>
+              setGameQuery({ ...gameQuery, sortOrder })
+            }
+            selectedSortOrder={gameQuery.sortOrder}
+          />
         </HStack>
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
