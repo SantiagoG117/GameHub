@@ -1,3 +1,6 @@
+//Since the noImage image is an asset that needs to be deployed with our application we must imported as a module instead of calling it by its path
+import noImage from "@/assets/no-image-placeholder-6f3882e0.webp"; 
+
 /* 
     rawg API supports cropping images on the fly by simply adding the word crop after media/ in the image url and specifying
     the width and height of the image.
@@ -7,7 +10,8 @@
 */
 
 const getCroppedImageUrl = (url: string) => {
-  if (!url) return "";
+  if (!url) return noImage;
+
   const target = "media/";
   const index = url.indexOf(target) + target.length; // Get the index of the end of the media/ string
 
