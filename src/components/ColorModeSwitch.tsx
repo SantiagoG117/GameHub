@@ -13,7 +13,7 @@ function ColorModeSwitch() {
       >
         <Switch.HiddenInput />
         <Switch.Control />
-        <Switch.Label>Dark Mode</Switch.Label>
+        <Switch.Label whiteSpace="nowrap">Dark Mode</Switch.Label>
       </Switch.Root>
     </HStack>
   );
