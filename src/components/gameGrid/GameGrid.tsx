@@ -6,10 +6,10 @@ import GameCardContainer from "./GameCardContainer";
 import { GameQuery } from "@/App";
 
 interface Props {
-  gameQuery: GameQuery
+  gameQuery: GameQuery;
 }
 
-function GameGrid({ gameQuery}: Props) {
+function GameGrid({ gameQuery }: Props) {
   // Pass the selected Genre to the useGames hook
   const { data, error, isLoading } = useGames(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
