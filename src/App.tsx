@@ -1,12 +1,19 @@
 import "./App.css";
-import { Grid, GridItem, Show, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Grid,
+  GridItem,
+  HStack,
+  Show,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
-import GameGrid from "./components/gameCard/GameGrid";
+import GameGrid from "./components/gameGrid/GameGrid";
 import GenreList from "./components/sideBar/GenreList";
 import { useState } from "react";
 import { Genres } from "./hooks/useGenres";
-import PlatformSelector from "./components/PlatformSelector";
+import PlatformSelector from "./components/gameGrid/PlatformSelector";
 import { Platforms } from "./hooks/usePlatforms";
+import OrderBySelector from "./components/gameGrid/OrderBySelector";
 
 /* Query object pattern: Pack all related objects required to query the games inside a single object */
 export interface GameQuery {
@@ -50,17 +57,18 @@ function App() {
 
       {/* Game card grid */}
       <GridItem area="main">
-        <PlatformSelector
-          /*App component is notified by the PlatformSelector that a platform was selected and receives it  */
-          onSelectedPlatform={(platform) =>
-            setGameQuery({ ...gameQuery, platform })
-          }
-          // The parent component sends the current state of the selectedPlatform back to the Platform component
-          selectedPlatform={gameQuery.platform}
-        />
-        <GameGrid
-        gameQuery={gameQuery}
-        />
+        <HStack spaceX={2} paddingLeft={2} >
+          <PlatformSelector
+            /*App component is notified by the PlatformSelector that a platform was selected and receives it  */
+            onSelectedPlatform={(platform) =>
+              setGameQuery({ ...gameQuery, platform })
+            }
+            // The parent component sends the current state of the selectedPlatform back to the Platform component
+            selectedPlatform={gameQuery.platform}
+          />
+          <OrderBySelector />
+        </HStack>
+        <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>
   );
