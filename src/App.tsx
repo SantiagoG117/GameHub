@@ -19,7 +19,8 @@ import OrderBySelector from "./components/gameGrid/OrderBySelector";
 export interface GameQuery {
   genre: Genres | null;
   platform: Platforms | null;
-  sortOrder: {value: string, label: string};
+  sortOrder: { value: string; label: string };
+  searchedText: string | null;
 }
 
 function App() {
@@ -42,7 +43,11 @@ function App() {
     >
       {/* Nav bar */}
       <GridItem area="nav">
-        <NavBar />
+        <NavBar
+          onSearch={(searchedText) =>
+            setGameQuery({ ...gameQuery, searchedText })
+          }
+        />
       </GridItem>
 
       {/* Genre side bar */}

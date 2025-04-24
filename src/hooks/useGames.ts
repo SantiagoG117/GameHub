@@ -29,6 +29,7 @@ const useGames = (gameQuery: GameQuery) =>
         genres: gameQuery.genre?.id,
         parent_platforms: gameQuery.platform?.id,
         ordering: gameQuery.sortOrder?.value,
+        search: gameQuery?.searchedText,
       },
     },
     [gameQuery] // Any change in the gameQuery object React will re-fresh the data with the new filters

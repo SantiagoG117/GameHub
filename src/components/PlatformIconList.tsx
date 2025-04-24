@@ -1,4 +1,3 @@
-import { Platforms } from "@/hooks/useGames";
 import { HStack, Icon, Text } from "@chakra-ui/react";
 import {
   FaWindows,
@@ -12,6 +11,7 @@ import { MdPhoneIphone } from "react-icons/md";
 import { SiNintendo } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
 import { IconType } from "react-icons";
+import { Platforms } from "@/hooks/usePlatforms";
 
 interface Props {
   platform: { platform: Platforms }[];
@@ -41,7 +41,8 @@ function PlatformIconList({ platform }: Props) {
 
   return (
     <HStack marginY={1}>
-      {platform.map(({ platform }) => {
+      {(platform || []).map(({ platform }) => {
+        // Ensure platform is an array to prevent errors realted to undefined objects
         const IconComponent = iconMap[platform.slug]; // Get the icon from the map
         return (
           IconComponent && ( // Render only if the icon exists
