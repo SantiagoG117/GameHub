@@ -1,11 +1,11 @@
-import useGenres, { genres } from "@/hooks/useGenres";
+import useGenres, { Genres } from "@/hooks/useGenres";
 import getCroppedImageUrl from "@/services/image-url";
 import { Button, Heading, HStack, Image, List } from "@chakra-ui/react";
 import GenreSkeleton from "./GenreSkeleton";
 
 interface Props {
-  onSelectedGenre: (genre: genres) => void; // Notifies the parent of this component that a Genre has been selected
-  selectedGenre: genres | null;
+  onSelectedGenre: (genre: Genres) => void; // Notifies the parent of this component that a Genre has been selected
+  selectedGenre: Genres | null;
 }
 
 function GenreList({ onSelectedGenre, selectedGenre }: Props) {
