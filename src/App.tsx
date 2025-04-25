@@ -11,7 +11,7 @@ import NavBar from "./components/NavBar";
 import GameGrid from "./components/gameGrid/GameGrid";
 import GenreList from "./components/sideBar/GenreList";
 import { useState } from "react";
-import { Genres } from "./hooks/useGenres";
+import { genres } from "./hooks/useGenres";
 import PlatformSelector from "./components/gameGrid/PlatformSelector";
 import { Platforms } from "./hooks/usePlatforms";
 import OrderBySelector from "./components/gameGrid/OrderBySelector";
@@ -19,7 +19,7 @@ import GameHeading from "./components/gameGrid/GameHeading";
 
 /* Query object pattern: Pack all related objects required to query the games inside a single object */
 export interface GameQuery {
-  genre: Genres | null;
+  genre: genres | null;
   platform: Platforms | null;
   sortOrder: { value: string; label: string };
   searchedText: string | null;

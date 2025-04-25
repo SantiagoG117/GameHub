@@ -2,7 +2,7 @@
 
 import { GameQuery } from "@/App";
 import useData from "./useData";
-import { Genres } from "./useGenres";
+import { genres } from "./useGenres";
 import { Platforms } from "./usePlatforms";
 
 export interface Games {

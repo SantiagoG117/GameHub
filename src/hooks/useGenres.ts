@@ -1,4 +1,4 @@
-import useData from "./useData";
+import genres from "@/data/genres";
 
 //? Custom Hook responsible for definining the endpoint for genres and the object returned by the API
 export interface Genres {
@@ -9,6 +9,7 @@ export interface Genres {
   image_background: string;
 }
 
-const useGenres = () => useData<Genres>("/genres");
+// const useGenres = () => useData<Genres>("/genres");
+const useGenres = () => ({ data: genres, isLoading: false, error: null });
 
 export default useGenres;

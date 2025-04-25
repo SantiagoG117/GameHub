@@ -1,11 +1,11 @@
-import useGenres, { Genres } from "@/hooks/useGenres";
+import useGenres, { genres } from "@/hooks/useGenres";
 import getCroppedImageUrl from "@/services/image-url";
 import { Button, Heading, HStack, Image, List } from "@chakra-ui/react";
 import GenreSkeleton from "./GenreSkeleton";
 
 interface Props {
-  onSelectedGenre: (genre: Genres) => void; // Notifies the parent of this component that a Genre has been selected
-  selectedGenre: Genres | null;
+  onSelectedGenre: (genre: genres) => void; // Notifies the parent of this component that a Genre has been selected
+  selectedGenre: genres | null;
 }
 
 function GenreList({ onSelectedGenre, selectedGenre }: Props) {
@@ -18,7 +18,9 @@ function GenreList({ onSelectedGenre, selectedGenre }: Props) {
 
   return (
     <>
-    <Heading fontSize='2xl' marginBottom={3}>Genres</Heading>
+      <Heading fontSize="2xl" marginBottom={3}>
+        Genres
+      </Heading>
       {isLoading && (
         <List.Root listStyleType="none">
           {skeletons.map((skeleton) => (
