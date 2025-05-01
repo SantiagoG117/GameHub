@@ -12,10 +12,10 @@ import GameGrid from "./components/gameGrid/GameGrid";
 import GenreList from "./components/sideBar/GenreList";
 import { useState } from "react";
 import PlatformSelector from "./components/gameGrid/PlatformSelector";
-import { Platforms } from "./hooks/usePlatforms";
 import OrderBySelector from "./components/gameGrid/OrderBySelector";
 import GameHeading from "./components/gameGrid/GameHeading";
 import { Genres } from "./services/genresService";
+import { Platforms } from "./services/platformsService";
 
 /* Query object pattern: Pack all related objects required to query the games inside a single object */
 export interface GameQuery {
@@ -84,7 +84,6 @@ function App() {
             />
           </HStack>
         </Box>
-
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>

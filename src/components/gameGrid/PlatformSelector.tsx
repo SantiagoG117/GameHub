@@ -1,5 +1,5 @@
-import { Platforms } from "@/hooks/usePlatforms";
 import usePlatforms from "@/hooks/usePlatforms";
+import { Platforms } from "@/services/platformsService";
 import { Button, Menu, Portal } from "@chakra-ui/react";
 import { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
@@ -25,7 +25,7 @@ function PlatformSelector({ onSelectedPlatform, selectedPlatform }: Props) {
       <Portal>
         <Menu.Positioner>
           <Menu.Content>
-            {data
+            {data?.results
               .sort((a, b) => a.name.localeCompare(b.name)) //Sort by name in ascending order
               .map((platform) => (
                 <Menu.Item

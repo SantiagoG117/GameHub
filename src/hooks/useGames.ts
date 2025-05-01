@@ -1,8 +1,10 @@
 //? Custom Hook responsible for definining the endpoint for games and the object returned by the API
 
 import { GameQuery } from "@/App";
-import useData from "./useData";
-import { Platforms } from "./usePlatforms";
+import { Platforms } from "@/services/platformsService";
+import { useQuery } from "@tanstack/react-query";
+import ApiClient, { FetchedData } from "@/services/apiClient";
+
 
 export interface Games {
   id: number;
@@ -14,7 +16,7 @@ export interface Games {
   rating_top: number;
 }
 
-const useGames = (gameQuery: GameQuery) =>
+const useGames = (gameQuery: GameQuery) => {
   /* 
     To filter games by genre we have to pass genre as a query string parameter
       - A query string parameter is a key-value pair appended to the URL of an HTTP request to pass additional
@@ -22,17 +24,24 @@ const useGames = (gameQuery: GameQuery) =>
       - RAWG API specifies the genres and parent_platforms query string parameters as number objects 
       - params is one of the properties of the AxiosRequestConfig object
   */
-  useData<Games>(
-    "/games",
-    {
-      params: {
-        genres: gameQuery.genre?.id,
-        parent_platforms: gameQuery.platform?.id,
-        ordering: gameQuery.sortOrder?.value,
-        search: gameQuery?.searchedText,
-      },
+
+  const apiClient = new ApiClient<Games>("/games", {
+    params: {
+      genres: gameQuery.genre?.id,
+      parent_platforms: gameQuery.platform?.id,
+      ordering: gameQuery.sortOrder?.value,
+      search: gameQuery?.searchedText,
     },
-    [gameQuery] // Any change in the gameQuery object React will re-fresh the data with the new filters
-  );
+  });
+
+  //How can I call the server everytime the values of gameQuery change?
+  const { request } = apiClient.getAll();
+
+  //React query object: Provides auto-retries in case the call to the server fails, automtic refresh and caching
+  return useQuery<FetchedData<Games>, Error>({
+    queryKey: ["games", gameQuery], //If any of the values in gamequery changes, react query will refresh the games from the backend with the requested string parameters 
+    queryFn: () => request,
+  });
+};
 
 export default useGames;
