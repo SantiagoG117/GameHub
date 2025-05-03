@@ -1,8 +1,7 @@
 import getCroppedImageUrl from "@/services/image-url";
 import { Button, Heading, HStack, Image, List } from "@chakra-ui/react";
 import GenreSkeleton from "./GenreSkeleton";
-import { Genres } from "@/services/genresService";
-import useGenres from "@/hooks/useGenres";
+import useGenres, { Genres } from "@/hooks/useGenres";
 
 interface Props {
   onSelectedGenre: (genre: Genres) => void; // Notifies the parent of this component that a Genre has been selected

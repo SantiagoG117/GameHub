@@ -14,8 +14,8 @@ import { useState } from "react";
 import PlatformSelector from "./components/gameGrid/PlatformSelector";
 import OrderBySelector from "./components/gameGrid/OrderBySelector";
 import GameHeading from "./components/gameGrid/GameHeading";
-import { Genres } from "./services/genresService";
-import { Platforms } from "./services/platformsService";
+import { Genres } from "./hooks/useGenres";
+import { Platforms } from "./hooks/usePlatforms";
 
 /* Query object pattern: Pack all related objects required to query the games inside a single object */
 export interface GameQuery {

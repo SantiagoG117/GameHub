@@ -2,16 +2,23 @@
 
 import { CACHE_KEY_PLATFORMS } from "@/constants";
 import platforms from "@/data/platforms";
-import { FetchedData } from "@/services/apiClient";
-import platformsService, { Platforms } from "@/services/platformsService";
+import ApiClient, { FetchedData } from "@/services/apiClient";
 import { useQuery } from "@tanstack/react-query";
 
-const usePlatforms = () => {
-  const { request } = platformsService.getAll();
+export interface Platforms {
+  id: number;
+  name: string;
+  slug: string;
+}
 
-  //Generic types: <Type of data we are fetching, Type of Error>
+//? Custom hook responsible for managing the cache memory for platforms and connecting the data returned by the API client with the component.
+const usePlatforms = () => {
+  //API client responsible for making HTTP requests to the /genres endpoint and is dedicated to work with objects of type Genres
+  const apiClient = new ApiClient<Platforms>("/platforms/lists/parents");
+  const { request } = apiClient.getAll();
 
   //React query object: Provides auto-retries in case the call to the server fails, automtic refresh and caching
+  //Generic types: <Type of data we are fetching, Type of Error>
   return useQuery<FetchedData<Platforms>, Error>({
     queryKey: CACHE_KEY_PLATFORMS,
     queryFn: () => request,
