@@ -25,15 +25,6 @@ const useGames = (gameQuery: GameQuery) => {
       - params is one of the properties of the AxiosRequestConfig object
   */
 
-  const apiClient = new ApiClient<Games>("/games", {
-    params: {
-      genres: gameQuery.genre?.id,
-      parent_platforms: gameQuery.platform?.id,
-      ordering: gameQuery.sortOrder?.value,
-      search: gameQuery?.searchedText,
-    },
-  });
-
   //React query object: Provides auto-retries in case the call to the server fails, automtic refresh and caching
   return useInfiniteQuery<FetchedData<Games>, Error>({
     queryKey: ["games", gameQuery], //Everytime the gameQuery object changes, react query will refresh the games from the backend with the requested string parameters.
@@ -44,9 +35,9 @@ const useGames = (gameQuery: GameQuery) => {
           parent_platforms: gameQuery.platform?.id,
           ordering: gameQuery.sortOrder?.value,
           search: gameQuery?.searchedText,
+          page: pageParam, //Enables data pagination
           _start: (pageParam - 1) * pageSize,
           _limit: pageSize,
-          page: pageParam, //Enables data pagination
         },
       }).getAll().request,
 
@@ -59,8 +50,11 @@ const useGames = (gameQuery: GameQuery) => {
       next page number and pass it to the queryFn
     */
     getNextPageParam: (lastPage, allPages) => {
+      console.log(allPages.length + 1);
       return lastPage.next ? allPages.length + 1 : undefined;
     },
+
+    staleTime: 24 * 60 * 60 * 1000, //24hrs
   });
 };
 
