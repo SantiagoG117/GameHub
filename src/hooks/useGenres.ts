@@ -25,6 +25,7 @@ const useGenres = () => {
     //Prepopulate the cache with Default data before the fresh data is fetched from the server
     initialData: {
       count: genres.length,
+      next: null, //Local data us no paginated, there is no next page to fetch. This is why we set next to null
       results: genres,
     },
   });

@@ -1,4 +1,5 @@
-import { SimpleGrid, Text, Box } from "@chakra-ui/react";
+import React from "react";
+import { SimpleGrid, Text } from "@chakra-ui/react";
 import useGames from "@/hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
@@ -10,8 +11,16 @@ interface Props {
 }
 
 function GameGrid({ gameQuery }: Props) {
+  const pageSize = 1;
   // Pass the selected Genre to the useGames hook
-  const { data, error, isLoading } = useGames(gameQuery);
+  const {
+    data,
+    error,
+    isLoading,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useGames(gameQuery);
 
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -40,12 +49,29 @@ function GameGrid({ gameQuery }: Props) {
         gap={3}
         padding="10px"
       >
-        {data?.results.map((game) => (
+        {/* 
+          data is an instance of InfiniteData. The pages parameter contains the data for all pages.
+          We must iterate over each page object in pages and render the data for each page separately. 
+        */}
+        {data?.pages.map((page, index) => (
+          <React.Fragment key={index}>
+            {page?.results.map((game) => (
+              <GameCardContainer key={game.id}>
+                <GameCard game={game} />
+              </GameCardContainer>
+            ))}
+          </React.Fragment>
+        ))}
+
+        {/* {data?.results.map((game) => (
           <GameCardContainer key={game.id}>
             <GameCard game={game} />
           </GameCardContainer>
-        ))}
+        ))} */}
       </SimpleGrid>
+      {hasNextPage && (
+        <button onClick={() => fetchNextPage()}>Load more</button>
+      )}
     </>
   );
 }

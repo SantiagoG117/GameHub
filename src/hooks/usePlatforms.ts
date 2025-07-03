@@ -26,6 +26,7 @@ const usePlatforms = () => {
     //Default data before the fresh data is fetched from the server
     initialData: {
       count: platforms.length,
+      next: null, //Local data us no paginated, there is no next page to fetch. This is why we set next to null
       results: platforms,
     },
   });
