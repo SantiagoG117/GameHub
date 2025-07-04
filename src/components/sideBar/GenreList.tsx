@@ -4,11 +4,11 @@ import GenreSkeleton from "./GenreSkeleton";
 import useGenres, { Genres } from "@/hooks/useGenres";
 
 interface Props {
-  onSelectedGenre: (genre: Genres) => void; // Notifies the parent of this component that a Genre has been selected
-  selectedGenre: Genres | null;
+  onSelectedGenreId: (genreId: number) => void; // Notifies the parent of this component that a Genre has been selected
+  selectedGenreId: number | null;
 }
 
-function GenreList({ onSelectedGenre, selectedGenre }: Props) {
+function GenreList({ onSelectedGenreId, selectedGenreId }: Props) {
   const { data, isLoading, error } = useGenres();
 
   const skeletons = [
@@ -41,14 +41,12 @@ function GenreList({ onSelectedGenre, selectedGenre }: Props) {
                 objectFit="cover"
               />
               <Button
-                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
-                color={
-                  genre.id === selectedGenre?.id ? "yellow.400" : undefined
-                }
+                fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
+                color={genre.id === selectedGenreId ? "yellow.400" : undefined}
                 variant="ghost"
                 fontSize="lg"
                 padding={1}
-                onClick={() => onSelectedGenre(genre)}
+                onClick={() => onSelectedGenreId(genre.id)}
                 whiteSpace="normal" // Allow text to wrap
                 textAlign="left" // Align text to the left
                 maxWidth="150px" // Limit the width to ensure wrapping

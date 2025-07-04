@@ -1,4 +1,6 @@
 import { GameQuery } from "@/App";
+import genres from "@/data/genres";
+import platforms from "@/data/platforms";
 import { Heading } from "@chakra-ui/react";
 
 interface Props {
@@ -7,12 +9,16 @@ interface Props {
 
 function GameHeading({ gameQuery }: Props) {
   /* 
-    String literal: Create strings that allow embedded JavaScript expressions in the form of string interpolation: ${expression} 
-    to create dynamic content
+    TODO: As part of the refactoring, this component will break because we are calling platform?.name and genre?.name
+        ! Use useGames and useGenres hook to find the platform and genre with the given id. Once we get each object we can
+        ! render their respective name
   */
-  const heading = `${gameQuery?.platform?.name || ""} ${
-    gameQuery?.genre?.name || ""
-  } Games`;
+
+  const genre = genres.find((genre) => genre.id === gameQuery?.genreId);
+  const platform = platforms.find(
+    (platform) => platform.id === gameQuery?.platformId
+  );
+  const heading = `${platform?.name || ""} ${genre?.name || ""} Games`;
 
   return (
     <Heading as="h1" fontSize="5xl" marginY={5}>

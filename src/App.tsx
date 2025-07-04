@@ -19,8 +19,8 @@ import { Platforms } from "./hooks/usePlatforms";
 
 /* Query object pattern: Pack all related objects required to query the games inside a single object */
 export interface GameQuery {
-  genre: Genres | null;
-  platform: Platforms | null;
+  genreId: number | null;
+  platformId: number | null;
   sortOrder: { value: string; label: string };
   searchedText: string | null;
 }
@@ -57,8 +57,10 @@ function App() {
         <GridItem area="aside" paddingX={5}>
           {/* App component is notified by the GenreList component that a Genre was selected and receives it */}
           <GenreList
-            onSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
-            selectedGenre={gameQuery.genre}
+            onSelectedGenreId={(genreId) =>
+              setGameQuery({ ...gameQuery, genreId })
+            }
+            selectedGenreId={gameQuery.genreId}
           />
         </GridItem>
       </Show>
@@ -69,12 +71,15 @@ function App() {
           <GameHeading gameQuery={gameQuery} />
           <HStack spaceX={2}>
             <PlatformSelector
-              /*App component is notified by the PlatformSelector that a platform was selected and receives it  */
-              onSelectedPlatform={(platform) =>
-                setGameQuery({ ...gameQuery, platform })
+              /*
+                TODO: Replace the platform object with the platform id
+                App component is notified by the PlatformSelector that a platform was selected and receives it
+              */
+              onSelectedPlatformId={(platformId) =>
+                setGameQuery({ ...gameQuery, platformId })
               }
               // The parent component sends the current state of the selectedPlatform back to the Platform component
-              selectedPlatform={gameQuery.platform}
+              selectedPlatformId={gameQuery.platformId}
             />
             <OrderBySelector
               onSelectedSortOrder={(sortOrder) =>

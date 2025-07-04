@@ -28,14 +28,15 @@ const useGames = (gameQuery: GameQuery) => {
   //React query object: Provides auto-retries in case the call to the server fails, automtic refresh and caching
   return useInfiniteQuery<FetchedData<Games>, Error>({
     queryKey: ["games", gameQuery], //Everytime the gameQuery object changes, react query will refresh the games from the backend with the requested string parameters.
+    // Returns a promise that resolves to the API response data for the current page
     queryFn: ({ pageParam = 1 }) =>
       new ApiClient<Games>("/games", {
         params: {
-          genres: gameQuery.genre?.id,
-          parent_platforms: gameQuery.platform?.id,
+          genres: gameQuery.genreId,
+          parent_platforms: gameQuery.platformId,
           ordering: gameQuery.sortOrder?.value,
           search: gameQuery?.searchedText,
-          page: pageParam, //Enables data pagination
+          page: pageParam, // Current page number for pagination
           _start: (pageParam - 1) * pageSize,
           _limit: pageSize,
         },
@@ -50,7 +51,6 @@ const useGames = (gameQuery: GameQuery) => {
       next page number and pass it to the queryFn
     */
     getNextPageParam: (lastPage, allPages) => {
-      console.log(allPages.length + 1);
       return lastPage.next ? allPages.length + 1 : undefined;
     },
 
