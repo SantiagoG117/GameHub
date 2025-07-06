@@ -24,11 +24,7 @@ const usePlatforms = () => {
     queryFn: () => request,
     staleTime: 24 * 60 * 60 * 1000, //Data will be considered fresh for 24 hours
     //Default data before the fresh data is fetched from the server
-    initialData: {
-      count: platforms.length,
-      next: null, //Local data us no paginated, there is no next page to fetch. This is why we set next to null
-      results: platforms,
-    },
+    initialData: platforms,
   });
 };
 

@@ -19,8 +19,8 @@ import { Platforms } from "./hooks/usePlatforms";
 
 /* Query object pattern: Pack all related objects required to query the games inside a single object */
 export interface GameQuery {
-  genreId: number | null;
-  platformId: number | null;
+  genreId: number | undefined;
+  platformId: number | undefined;
   sortOrder: { value: string; label: string };
   searchedText: string | null;
 }
@@ -72,7 +72,6 @@ function App() {
           <HStack spaceX={2}>
             <PlatformSelector
               /*
-                TODO: Replace the platform object with the platform id
                 App component is notified by the PlatformSelector that a platform was selected and receives it
               */
               onSelectedPlatformId={(platformId) =>

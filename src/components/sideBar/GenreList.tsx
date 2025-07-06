@@ -5,7 +5,7 @@ import useGenres, { Genres } from "@/hooks/useGenres";
 
 interface Props {
   onSelectedGenreId: (genreId: number) => void; // Notifies the parent of this component that a Genre has been selected
-  selectedGenreId: number | null;
+  selectedGenreId: number | undefined;
 }
 
 function GenreList({ onSelectedGenreId, selectedGenreId }: Props) {
