@@ -4,6 +4,7 @@ import { CACHE_KEY_PLATFORMS } from "@/constants";
 import platforms from "@/data/platforms";
 import ApiClient, { FetchedData } from "@/services/apiClient";
 import { useQuery } from "@tanstack/react-query";
+import ms from "ms";
 
 export interface Platforms {
   id: number;
@@ -22,7 +23,7 @@ const usePlatforms = () => {
   return useQuery<FetchedData<Platforms>, Error>({
     queryKey: CACHE_KEY_PLATFORMS,
     queryFn: () => request,
-    staleTime: 24 * 60 * 60 * 1000, //Data will be considered fresh for 24 hours
+    staleTime: ms("24h"), //Data will be considered fresh for 24 hours
     //Default data before the fresh data is fetched from the server
     initialData: platforms,
   });

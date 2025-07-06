@@ -1,9 +1,10 @@
 //? Custom Hook responsible for definining the endpoint for games and the object returned by the API
 
 import { GameQuery } from "@/App";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import ApiClient, { FetchedData } from "@/services/apiClient";
 import { Platforms } from "./usePlatforms";
+import ms from "ms";
 
 export interface Games {
   id: number;
@@ -54,7 +55,7 @@ const useGames = (gameQuery: GameQuery) => {
       return lastPage.next ? allPages.length + 1 : undefined;
     },
 
-    staleTime: 24 * 60 * 60 * 1000, //24hrs
+    staleTime: ms("24h"), //24hrs
   });
 };
 

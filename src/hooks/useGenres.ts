@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { CACHE_KEY_GENRES } from "@/constants";
 import ApiClient, { FetchedData } from "@/services/apiClient";
 import genres from "@/data/genres";
+import ms from "ms";
 
 export interface Genres {
   id: number;
@@ -21,7 +22,7 @@ const useGenres = (genreId?: number) => {
   return useQuery<FetchedData<Genres>, Error>({
     queryKey: CACHE_KEY_GENRES,
     queryFn: () => request,
-    staleTime: 24 * 60 * 60 * 1000, //Data will be considered fresh for 24 hours
+    staleTime: ms("24h"), //Data will be considered fresh for 24 hours
     //Prepopulate the cache with Default data before the fresh data is fetched from the server
     initialData: genres,
   });
