@@ -7,15 +7,14 @@ import {
   Show,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import NavBar from "./components/NavBar";
+
 import GameGrid from "./components/gameGrid/GameGrid";
-import GenreList from "./components/sideBar/GenreList";
+import GenreList from "./components/genreSideBar/GenreList";
 import { useState } from "react";
 import PlatformSelector from "./components/gameGrid/PlatformSelector";
 import OrderBySelector from "./components/gameGrid/OrderBySelector";
 import GameHeading from "./components/gameGrid/GameHeading";
-import { Genres } from "./hooks/useGenres";
-import { Platforms } from "./hooks/usePlatforms";
+import NavBar from "./components/navBar/NavBar";
 
 /* Query object pattern: Pack all related objects required to query the games inside a single object */
 export interface GameQuery {
@@ -24,6 +23,7 @@ export interface GameQuery {
   sortOrder: { value: string; label: string };
   searchedText: string | null;
 }
+
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery); //Initialize the state as an empty GameQuery object
@@ -71,9 +71,7 @@ function App() {
           <GameHeading gameQuery={gameQuery} />
           <HStack spaceX={2}>
             <PlatformSelector
-              /*
-                App component is notified by the PlatformSelector that a platform was selected and receives it
-              */
+              //App component is notified by the PlatformSelector that a platform was selected and receives it
               onSelectedPlatformId={(platformId) =>
                 setGameQuery({ ...gameQuery, platformId })
               }

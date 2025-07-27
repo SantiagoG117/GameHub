@@ -1,5 +1,5 @@
 import React from "react";
-import { Provider } from "@/components/ui/provider";
+import { Provider } from "@/components/chakraUI/provider";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
