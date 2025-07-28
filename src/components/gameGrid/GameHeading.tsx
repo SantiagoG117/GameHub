@@ -1,18 +1,15 @@
-import { GameQuery } from "@/App";
-import useGenres from "@/hooks/useGenres";
-import usePlatforms from "@/hooks/usePlatforms";
 import { Heading } from "@chakra-ui/react";
-import fetchById from "@/hooks/fetchById";
 import usePlatform from "@/hooks/usePlatform";
 import useGenre from "@/hooks/useGenre";
+import useGameQueryStore from "@/stateManagement/GameQueryStore";
 
-interface Props {
-  gameQuery: GameQuery | null;
-}
+function GameHeading() {
+  // Selector: Component will only be dependent on platformId and genreId. Any other changes in the Global state won't cause a re-render
+  const platformId = useGameQueryStore((s) => s.gameQuery.platformId);
+  const platform = usePlatform(platformId);
 
-function GameHeading({ gameQuery }: Props) {
-  const platform = usePlatform(gameQuery?.platformId);
-  const genre = useGenre(gameQuery?.genreId);
+  const genreId = useGameQueryStore((s) => s.gameQuery.genreId);
+  const genre = useGenre(genreId);
 
   const heading = `${platform?.name || ""} ${genre?.name || ""} Games`;
 

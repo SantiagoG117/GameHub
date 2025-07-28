@@ -1,12 +1,13 @@
+import useGameQueryStore from "@/stateManagement/GameQueryStore";
 import { Button, Menu, Portal } from "@chakra-ui/react";
 import { HiSortAscending } from "react-icons/hi";
 
-interface Props {
-  onSelectedSortOrder: (sortOrder: { value: string; label: string }) => void;
-  selectedSortOrder: { value: string; label: string } | null;
-}
+function OrderBySelector() {
+  // Selector: Component will only be dependent on sortOrder and setSortOrder . Any other changes in the Global state won't cause a re-render
 
-function OrderBySelector({ onSelectedSortOrder, selectedSortOrder }: Props) {
+  const sortOrder = useGameQueryStore((s) => s.gameQuery.sortOrder);
+  const setSortOrder = useGameQueryStore((s) => s.setSortOrder);
+
   const sortOrders = [
     { value: "", label: "Relevance" },
     { value: "-added", label: "Date added" },
@@ -21,7 +22,7 @@ function OrderBySelector({ onSelectedSortOrder, selectedSortOrder }: Props) {
       <Menu.Trigger asChild>
         <Button variant="outline" size="sm">
           <HiSortAscending /> Order by:{" "}
-          {selectedSortOrder ? selectedSortOrder.label : "Relevance"}
+          {sortOrder ? sortOrder.label : "Relevance"}
         </Button>
       </Menu.Trigger>
       <Portal>
@@ -33,7 +34,7 @@ function OrderBySelector({ onSelectedSortOrder, selectedSortOrder }: Props) {
                 <Menu.Item
                   key={sortOrder.value}
                   value={sortOrder.value}
-                  onClick={() => onSelectedSortOrder(sortOrder)} //Notifies the parent component that a sort order was selected and sends the selected state
+                  onClick={() => setSortOrder(sortOrder)} //Notifies the parent component that a sort order was selected and sends the selected state
                 >
                   {sortOrder.label}
                 </Menu.Item>

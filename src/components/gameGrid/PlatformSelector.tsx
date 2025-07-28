@@ -2,17 +2,16 @@ import usePlatforms from "@/hooks/usePlatforms";
 import { Button, Menu, Portal } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 import usePlatform from "@/hooks/usePlatform";
+import useGameQueryStore from "@/stateManagement/GameQueryStore";
 
-interface Props {
-  onSelectedPlatformId: (platformId: number) => void;
-  selectedPlatformId: number | undefined;
-}
+function PlatformSelector() {
+  //Global state access
+  // Selector: Component will only be dependent on platformId and setSelectedPlatform. Any other changes in the Global state won't cause a re-render
+  const platformId = useGameQueryStore((s) => s.gameQuery.platformId);
+  const setSelectedPlatform = useGameQueryStore((s) => s.setSelectedPlatform);
 
-function PlatformSelector({ onSelectedPlatformId, selectedPlatformId }: Props) {
+  const platform = usePlatform(platformId);
   const { data, error } = usePlatforms();
-  const platform = usePlatform(selectedPlatformId);
-
-  // const platform = data.results.find((p) => p.id === selectedPlatformId);
 
   if (error) return;
 
@@ -32,9 +31,7 @@ function PlatformSelector({ onSelectedPlatformId, selectedPlatformId }: Props) {
                 <Menu.Item
                   value={platform.name}
                   key={platform.id}
-                  onClick={() =>
-                    onSelectedPlatformId(platform.id)
-                  } /* Notifies the parent component that a platform was selected */
+                  onClick={() => setSelectedPlatform(platform.id)}
                 >
                   {platform.name}
                 </Menu.Item>

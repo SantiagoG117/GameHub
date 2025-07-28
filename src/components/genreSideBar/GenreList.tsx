@@ -2,13 +2,13 @@ import getCroppedImageUrl from "@/services/image-url";
 import { Button, Heading, HStack, Image, List } from "@chakra-ui/react";
 import GenreSkeleton from "./GenreSkeleton";
 import useGenres, { Genres } from "@/hooks/useGenres";
+import useGameQueryStore from "@/stateManagement/GameQueryStore";
 
-interface Props {
-  onSelectedGenreId: (genreId: number) => void; // Notifies the parent of this component that a Genre has been selected
-  selectedGenreId: number | undefined;
-}
+function GenreList() {
+  // Selector: Component will only be dependent on genreId and setSelectedGenre . Any other changes in the Global state won't cause a re-render
+  const selectedGenreId = useGameQueryStore((s) => s.gameQuery.genreId);
+  const setSelectedGenre = useGameQueryStore((s) => s.setSelectedGenre);
 
-function GenreList({ onSelectedGenreId, selectedGenreId }: Props) {
   const { data, isLoading, error } = useGenres();
 
   const skeletons = [
@@ -41,12 +41,12 @@ function GenreList({ onSelectedGenreId, selectedGenreId }: Props) {
                 objectFit="cover"
               />
               <Button
+                onClick={() => setSelectedGenre(genre.id)}
                 fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
                 color={genre.id === selectedGenreId ? "yellow.400" : undefined}
                 variant="ghost"
                 fontSize="lg"
                 padding={1}
-                onClick={() => onSelectedGenreId(genre.id)}
                 whiteSpace="normal" // Allow text to wrap
                 textAlign="left" // Align text to the left
                 maxWidth="150px" // Limit the width to ensure wrapping

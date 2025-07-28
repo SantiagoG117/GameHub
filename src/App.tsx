@@ -10,24 +10,14 @@ import {
 
 import GameGrid from "./components/gameGrid/GameGrid";
 import GenreList from "./components/genreSideBar/GenreList";
-import { useState } from "react";
 import PlatformSelector from "./components/gameGrid/PlatformSelector";
 import OrderBySelector from "./components/gameGrid/OrderBySelector";
 import GameHeading from "./components/gameGrid/GameHeading";
 import NavBar from "./components/navBar/NavBar";
 
 /* Query object pattern: Pack all related objects required to query the games inside a single object */
-export interface GameQuery {
-  genreId: number | undefined;
-  platformId: number | undefined;
-  sortOrder: { value: string; label: string };
-  searchedText: string | null;
-}
-
 
 function App() {
-  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery); //Initialize the state as an empty GameQuery object
-
   // hook that returns a boolean value based on the current screen size
   const isAboveLg = useBreakpointValue({ base: false, lg: true }); //Values for a screen bigger than 1024px
 
@@ -45,48 +35,27 @@ function App() {
     >
       {/* Nav bar */}
       <GridItem area="nav">
-        <NavBar
-          onSearch={(searchedText) =>
-            setGameQuery({ ...gameQuery, searchedText })
-          }
-        />
+        <NavBar />
       </GridItem>
 
       {/* Genre side bar */}
       <Show when={isAboveLg}>
         <GridItem area="aside" paddingX={5}>
-          {/* App component is notified by the GenreList component that a Genre was selected and receives it */}
-          <GenreList
-            onSelectedGenreId={(genreId) =>
-              setGameQuery({ ...gameQuery, genreId })
-            }
-            selectedGenreId={gameQuery.genreId}
-          />
+          <GenreList />
         </GridItem>
       </Show>
 
       {/* Game Grid */}
       <GridItem area="main">
         <Box paddingLeft={2}>
-          <GameHeading gameQuery={gameQuery} />
+          <GameHeading />
           <HStack spaceX={2}>
-            <PlatformSelector
-              //App component is notified by the PlatformSelector that a platform was selected and receives it
-              onSelectedPlatformId={(platformId) =>
-                setGameQuery({ ...gameQuery, platformId })
-              }
-              // The parent component sends the current state of the selectedPlatform back to the Platform component
-              selectedPlatformId={gameQuery.platformId}
-            />
-            <OrderBySelector
-              onSelectedSortOrder={(sortOrder) =>
-                setGameQuery({ ...gameQuery, sortOrder })
-              }
-              selectedSortOrder={gameQuery.sortOrder}
-            />
+            <PlatformSelector />
+            <OrderBySelector />
           </HStack>
         </Box>
-        <GameGrid gameQuery={gameQuery} />
+        {/* Games Grid */}
+        <GameGrid />
       </GridItem>
     </Grid>
   );

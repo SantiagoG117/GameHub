@@ -1,10 +1,10 @@
 //? Custom Hook responsible for definining the endpoint for games and the object returned by the API
 
-import { GameQuery } from "@/App";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ApiClient, { FetchedData } from "@/services/apiClient";
 import { Platforms } from "./usePlatforms";
 import ms from "ms";
+import useGameQueryStore from "@/stateManagement/GameQueryStore";
 
 export interface Games {
   id: number;
@@ -16,7 +16,10 @@ export interface Games {
   rating_top: number;
 }
 
-const useGames = (gameQuery: GameQuery) => {
+const useGames = () => {
+  //Global state: useGames will be re-executed when any of the values of gameQuery changed. Anything else won't trigger this hook
+  const gameQuery = useGameQueryStore((s) => s.gameQuery);
+
   const pageSize = 10;
   /* 
     To filter games by genre we have to pass genre as a query string parameter
@@ -33,10 +36,10 @@ const useGames = (gameQuery: GameQuery) => {
     queryFn: ({ pageParam = 1 }) =>
       new ApiClient<Games>("/games", {
         params: {
+          search: gameQuery?.searchedText,
           genres: gameQuery.genreId,
           parent_platforms: gameQuery.platformId,
           ordering: gameQuery.sortOrder?.value,
-          search: gameQuery?.searchedText,
           page: pageParam, // Current page number for pagination
           _start: (pageParam - 1) * pageSize,
           _limit: pageSize,
