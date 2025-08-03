@@ -1,6 +1,6 @@
 import { HStack, Image } from "@chakra-ui/react";
 import logo from "../../assets/logo.webp";
-import SearchInput from "../gameGrid/SearchInput";
+import SearchInput from "./SearchInput";
 import ColorModeSwitch from "../ColorModeSwitch";
 import useGameQueryStore from "@/stateManagement/GameQueryStore";
 
