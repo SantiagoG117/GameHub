@@ -1,10 +1,11 @@
 import React from "react";
 import { Provider } from "@/components/chakraUI/provider";
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes";
 
 const queryClient = new QueryClient();
 
@@ -22,7 +23,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <Provider>
-        <App />
+        {/* Lets React Router decide which component to render depending on the user's location */}
+        <RouterProvider router={router}></RouterProvider>
       </Provider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
