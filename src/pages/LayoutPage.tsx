@@ -1,5 +1,5 @@
 import NavBar from "@/components/navBar/NavBar";
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 
 function LayoutPage() {
@@ -7,7 +7,9 @@ function LayoutPage() {
     <>
       {/* All components should have a NavBar */}
       <NavBar />
-      <Outlet />
+      <Box padding={5}>
+        <Outlet />
+      </Box>
     </>
   );
 }

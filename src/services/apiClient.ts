@@ -1,3 +1,4 @@
+import { GameDetails } from "@/hooks/useGame";
 import axios, { AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
@@ -11,7 +12,7 @@ export interface FetchedData<T> {
   count: number;
   next: string | null;
   // previous: string | null;
-  results: T[]; //The type of results is will be converted to an array of T
+  results: T[]; //The type of results will be converted to an array of T
 }
 
 // Handles sending HTTP request to the Rawg API
@@ -22,6 +23,17 @@ class ApiClient<T> {
   constructor(endpoint: string, requestConfig?: AxiosRequestConfig) {
     this.endpoint = endpoint;
     this.requestConfig = requestConfig;
+  }
+
+  getGame() {
+    const controller = new AbortController();
+    const request = axiosInstance
+      .get<GameDetails>(this.endpoint, {
+        signal: controller.signal,
+      })
+      .then((response) => response.data);
+
+    return { request, cancel: () => controller.abort };
   }
 
   getAll() {

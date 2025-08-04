@@ -9,6 +9,7 @@ import useGameQueryStore from "@/stateManagement/GameQueryStore";
 export interface Games {
   id: number;
   name: string;
+  slug: string;
   background_image: string;
   // the type of parent_platforms is an array of objects, where each object has a signle property of type Platform
   parent_platforms: { platform: Platforms }[];
