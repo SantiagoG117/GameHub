@@ -2,20 +2,9 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ApiClient, { FetchedData } from "@/services/apiClient";
-import { Platforms } from "./usePlatforms";
 import ms from "ms";
 import useGameQueryStore from "@/stateManagement/GameQueryStore";
-
-export interface Games {
-  id: number;
-  name: string;
-  slug: string;
-  background_image: string;
-  // the type of parent_platforms is an array of objects, where each object has a signle property of type Platform
-  parent_platforms: { platform: Platforms }[];
-  metacritic: number;
-  rating_top: number;
-}
+import { Games } from "../entities/Games";
 
 const useGames = () => {
   //Global state: useGames will be re-executed when any of the values of gameQuery changed. Anything else won't trigger this hook

@@ -5,12 +5,7 @@ import platforms from "@/data/platforms";
 import ApiClient, { FetchedData } from "@/services/apiClient";
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
-
-export interface Platforms {
-  id: number;
-  name: string;
-  slug: string;
-}
+import { Platforms } from "../entities/Platforms";
 
 //? Custom hook responsible for managing the cache memory for platforms and connecting the data returned by the API client with the component.
 const usePlatforms = () => {

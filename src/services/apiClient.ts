@@ -1,4 +1,4 @@
-import { GameDetails } from "@/hooks/useGame";
+import { Games } from "@/entities/Games";
 import axios, { AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
@@ -28,7 +28,7 @@ class ApiClient<T> {
   getGame() {
     const controller = new AbortController();
     const request = axiosInstance
-      .get<GameDetails>(this.endpoint, {
+      .get<Games>(this.endpoint, {
         signal: controller.signal,
       })
       .then((response) => response.data);

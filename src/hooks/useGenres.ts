@@ -3,14 +3,7 @@ import { CACHE_KEY_GENRES } from "@/constants";
 import ApiClient, { FetchedData } from "@/services/apiClient";
 import genres from "@/data/genres";
 import ms from "ms";
-
-export interface Genres {
-  id: number;
-  name: string;
-  slug: string;
-  games_count: number;
-  image_background: string;
-}
+import { Genres } from "../entities/Genres";
 
 //? Custom hook responsible for managing the cache memory for genres and connecting the data returned by the API client with the component.
 const useGenres = (genreId?: number) => {
