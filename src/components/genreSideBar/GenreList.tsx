@@ -1,9 +1,8 @@
+import useGenres from "@/hooks/useGenres";
 import getCroppedImageUrl from "@/services/image-url";
+import useGameQueryStore from "@/stateManagement/GameQueryStore";
 import { Button, Heading, HStack, Image, List } from "@chakra-ui/react";
 import GenreSkeleton from "./GenreSkeleton";
-import useGenres from "@/hooks/useGenres";
-import { Genres } from "@/entities/Genres";
-import useGameQueryStore from "@/stateManagement/GameQueryStore";
 
 function GenreList() {
   // Selector: Component will only be dependent on genreId and setSelectedGenre . Any other changes in the Global state won't cause a re-render

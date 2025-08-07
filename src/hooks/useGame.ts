@@ -1,4 +1,4 @@
-import ApiClient, { FetchedData } from "@/services/apiClient";
+import ApiClient from "@/services/apiClient";
 import { useQuery } from "@tanstack/react-query";
 import { Games } from "../entities/Games";
 
