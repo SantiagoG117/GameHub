@@ -1,7 +1,8 @@
 //? Custom Hook responsible for definining the endpoint for games and the object returned by the API
 
 import { useInfiniteQuery } from "@tanstack/react-query";
-import ApiClient, { FetchedData } from "@/services/apiClient";
+import ApiClient from "@/services/apiClient";
+import { FetchedData } from "@/entities/FetchedData";
 import ms from "ms";
 import useGameQueryStore from "@/stateManagement/GameQueryStore";
 import { Games } from "../entities/Games";
@@ -34,7 +35,7 @@ const useGames = () => {
           _start: (pageParam - 1) * pageSize,
           _limit: pageSize,
         },
-      }).getAll().request,
+      }).getAllGames().request,
 
     /* 
       getNextPageParam() determines the next page number

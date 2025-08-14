@@ -1,5 +1,7 @@
 import { Games } from "@/entities/Games";
+import { Trailers } from "@/entities/Trailers";
 import axios, { AxiosRequestConfig } from "axios";
+import { FetchedData } from "../entities/FetchedData";
 
 const axiosInstance = axios.create({
   baseURL: "https://api.rawg.io/api",
@@ -7,13 +9,6 @@ const axiosInstance = axios.create({
     key: "a3d10e5f73d84fd9a53b2cd681320958", //The key will be included in the query string of every HTTP request
   },
 });
-
-export interface FetchedData<T> {
-  count: number;
-  next: string | null;
-  // previous: string | null;
-  results: T[]; //The type of results will be converted to an array of T
-}
 
 // Handles sending HTTP request to the Rawg API
 class ApiClient<T> {
@@ -36,7 +31,7 @@ class ApiClient<T> {
     return { request, cancel: () => controller.abort };
   }
 
-  getAll() {
+  getAllGames() {
     const controller = new AbortController(); //Built-in class in browsers that allows to cancel asynchronous operations like GET request
 
     const request = axiosInstance
@@ -48,6 +43,18 @@ class ApiClient<T> {
       .then((response) => response.data);
 
     //Return an object with two properties: The GET request promise and a cancel function
+    return { request, cancel: () => controller.abort };
+  }
+
+  getTrailer() {
+    const controller = new AbortController();
+
+    const request = axiosInstance
+      .get<FetchedData<T>>(this.endpoint, {
+        signal: controller.signal,
+      })
+      .then((response) => response.data);
+
     return { request, cancel: () => controller.abort };
   }
 }

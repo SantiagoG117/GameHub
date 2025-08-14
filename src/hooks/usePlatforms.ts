@@ -2,7 +2,8 @@
 
 import { CACHE_KEY_PLATFORMS } from "@/constants";
 import platforms from "@/data/platforms";
-import ApiClient, { FetchedData } from "@/services/apiClient";
+import ApiClient from "@/services/apiClient";
+import { FetchedData } from "@/entities/FetchedData";
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
 import { Platforms } from "../entities/Platforms";
@@ -11,7 +12,7 @@ import { Platforms } from "../entities/Platforms";
 const usePlatforms = () => {
   //API client responsible for making HTTP requests to the /genres endpoint and is dedicated to work with objects of type Genres
   const apiClient = new ApiClient<Platforms>("/platforms/lists/parents");
-  const { request } = apiClient.getAll();
+  const { request } = apiClient.getAllGames();
 
   //React query object: Provides auto-retries in case the call to the server fails, automtic refresh and caching
   //Generic types: <Type of data we are fetching, Type of Error>

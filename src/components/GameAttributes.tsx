@@ -1,9 +1,8 @@
 import { Games } from "@/entities/Games";
-import { SimpleGrid, List } from "@chakra-ui/react";
-import React from "react";
-import { data as game } from "react-router-dom";
+import { Box, List, SimpleGrid } from "@chakra-ui/react";
 import AttributesBox from "./AttributesBox";
 import CriticScore from "./gameCard/CriticScore";
+import GameTrailer from "./GameTrailer";
 
 interface Props {
   game: Games | undefined;
@@ -11,7 +10,7 @@ interface Props {
 
 function GameAttributes({ game }: Props) {
   return (
-    <SimpleGrid columns={2} gap="40px" as={"dl"}>
+    <SimpleGrid columns={3} gap="40px" as={"dl"}>
       <AttributesBox title="Platforms">
         <List.Root listStyle={"none"}>
           {game?.parent_platforms.map(({ platform }) => (
@@ -36,6 +35,11 @@ function GameAttributes({ game }: Props) {
           ))}
         </List.Root>
       </AttributesBox>
+      <Box gridRow="span 2">
+        <AttributesBox title="Trailer">
+          <GameTrailer game={game} />
+        </AttributesBox>
+      </Box>
     </SimpleGrid>
   );
 }

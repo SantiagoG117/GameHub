@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { CACHE_KEY_GENRES } from "@/constants";
-import ApiClient, { FetchedData } from "@/services/apiClient";
+import ApiClient from "@/services/apiClient";
+import { FetchedData } from "@/entities/FetchedData";
 import genres from "@/data/genres";
 import ms from "ms";
 import { Genres } from "../entities/Genres";
@@ -9,7 +10,7 @@ import { Genres } from "../entities/Genres";
 const useGenres = (genreId?: number) => {
   //API client responsible for making HTTP requests to the /genres endpoint and is dedicated to work with objects of type Genres
   const apiClient = new ApiClient<Genres>("/genres");
-  const { request } = apiClient.getAll();
+  const { request } = apiClient.getAllGames();
 
   //React query object: Provides auto-retries in case the call to the server fails, automtic refresh and caching
   return useQuery<FetchedData<Genres>, Error>({

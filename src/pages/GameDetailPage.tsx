@@ -1,9 +1,8 @@
-import AttributesBox from "@/components/AttributesBox";
 import ExpandableText from "@/components/ExpandableText";
-import GameAttributes from "@/components/gameAttributes";
-import CriticScore from "@/components/gameCard/CriticScore";
+import GameAttributes from "@/components/GameAttributes";
+import GameTrailer from "@/components/GameTrailer";
 import useGame from "@/hooks/useGame";
-import { Heading, List, SimpleGrid, Spinner } from "@chakra-ui/react";
+import { Heading, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 function GameDetailPage() {
