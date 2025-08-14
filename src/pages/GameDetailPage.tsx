@@ -2,7 +2,7 @@ import ExpandableText from "@/components/ExpandableText";
 import GameAttributes from "@/components/GameAttributes";
 import GameTrailer from "@/components/GameTrailer";
 import useGame from "@/hooks/useGame";
-import { Heading, Spinner } from "@chakra-ui/react";
+import { Box, Flex, Heading, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 function GameDetailPage() {
@@ -15,7 +15,14 @@ function GameDetailPage() {
     <>
       <Heading>{data?.name}</Heading>
       <ExpandableText text={data?.description_raw || ""} />
-      <GameAttributes game={data} />
+      <Flex gap={8} align="flex-start">
+        <Box flex="1">
+          <GameAttributes game={data} />
+        </Box>
+        <Box flex="1">
+          <GameTrailer game={data} />
+        </Box>
+      </Flex>
     </>
   );
 }

@@ -10,7 +10,7 @@ interface Props {
 
 function GameAttributes({ game }: Props) {
   return (
-    <SimpleGrid columns={3} gap="40px" as={"dl"}>
+    <SimpleGrid columns={2} gap="40px" as={"dl"}>
       <AttributesBox title="Platforms">
         <List.Root listStyle={"none"}>
           {game?.parent_platforms.map(({ platform }) => (
@@ -35,11 +35,6 @@ function GameAttributes({ game }: Props) {
           ))}
         </List.Root>
       </AttributesBox>
-      <Box gridRow="span 2">
-        <AttributesBox title="Trailer">
-          <GameTrailer game={game} />
-        </AttributesBox>
-      </Box>
     </SimpleGrid>
   );
 }
