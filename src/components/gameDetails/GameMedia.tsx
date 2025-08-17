@@ -14,13 +14,12 @@ function GameMedia({ gameId }: Props) {
 
   const { data: trailers, isLoading: isLoadingTrailer } = useTrailers(gameId);
 
-  // Define the aspect ratio and max width to match Splide
+  //Loading skeleton
   const aspectRatio = 0.6;
   const maxW = "600px";
-
   if (isLoadingScreenShots || isLoadingTrailer)
     return (
-      <Box width="100%" maxW={maxW} mx="auto">
+      <Box width="100%">
         <Skeleton
           width="100%"
           height="auto"
@@ -50,21 +49,23 @@ function GameMedia({ gameId }: Props) {
               controls
               poster={trailers.results[0].preview}
             >
-              <source src={trailers.results[0].data.max} />
+              <source src={trailers.results[0].data[480]} />
             </video>
           </SplideSlide>
         )}
-        {screenShots?.results.map((shot) => (
-          <SplideSlide key={shot.id}>
-            <Image
-              src={shot.image}
-              width="100%"
-              height="auto"
-              objectFit="cover"
-              borderRadius="md"
-            />
-          </SplideSlide>
-        ))}
+        {screenShots?.results.length &&
+          screenShots?.results.map((shot) => (
+            <SplideSlide key={shot.id}>
+              <Image
+                src={shot.image}
+                width="100%"
+                height="auto"
+                objectFit="cover"
+                borderRadius="md"
+                // minH={["180px", "220px", "260px"]}
+              />
+            </SplideSlide>
+          ))}
       </Splide>
     </Box>
   );

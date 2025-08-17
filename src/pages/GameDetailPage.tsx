@@ -6,12 +6,6 @@ import useGame from "@/hooks/useGame";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
-/* 
-  TODO:
-  ! Build Skeletons for Game Details page
-  ! Make the GameDetailPage responsive
-*/
-
 function GameDetailPage() {
   const params = useParams();
   const { data, isLoading, error } = useGame(params.gameName);
@@ -31,7 +25,8 @@ function GameDetailPage() {
         <Box flex="1">
           <GameAttributes game={data} />
         </Box>
-        <Box flex="1">
+        {/* Only apply flex 1 on large screens for responsive desing*/}
+        <Box width="100%" flex={["unset", "unset", "1"]}>
           <GameMedia gameId={data?.id} />
         </Box>
       </Flex>

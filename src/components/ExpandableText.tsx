@@ -18,16 +18,18 @@ function ExpandableText({ text }: Props) {
     isExpandable && isLong ? text.slice(0, 400) + "..." : text;
 
   return (
-    <Text fontSize={["xs", "2xs", "sm", "md", "lg"]} paddingBottom={3}>
+    <Text fontSize={["xs", "sm", "md", "lg"]} paddingBottom={3}>
       {displayText}{" "}
       <Button
-        size={["xs", "sm", "md", "lg"]}
+        size={["xs", "sm", "md"]}
         fontWeight="bold"
         colorScheme="yellow"
         bg="yellow.400"
         color="black"
         _hover={{ bg: "yellow.500" }}
         onClick={() => setIsExpandable(!isExpandable)}
+        fontSize={["xs", "2xs", "sm", "md", "lg"]}
+        padding={["0.5", "1", "1.5", "2.0"]}
       >
         {isExpandable ? "Show more" : "Show less"}
       </Button>
