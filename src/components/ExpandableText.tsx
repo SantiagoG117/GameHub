@@ -18,10 +18,10 @@ function ExpandableText({ text }: Props) {
     isExpandable && isLong ? text.slice(0, 400) + "..." : text;
 
   return (
-    <Text>
+    <Text fontSize={["xs", "2xs", "sm", "md", "lg"]} paddingBottom={3}>
       {displayText}{" "}
       <Button
-        size="xs"
+        size={["xs", "sm", "md", "lg"]}
         fontWeight="bold"
         colorScheme="yellow"
         bg="yellow.400"

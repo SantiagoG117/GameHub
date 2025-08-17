@@ -13,7 +13,9 @@ function GameAttributes({ game }: Props) {
       <AttributesBox title="Platforms">
         <List.Root listStyle={"none"}>
           {game?.parent_platforms.map(({ platform }) => (
-            <List.Item key={platform.id}>{platform.name}</List.Item>
+            <List.Item key={platform.id} fontSize={["sm", "md", "lg"]}>
+              {platform.name}
+            </List.Item>
           ))}
         </List.Root>
       </AttributesBox>
@@ -23,14 +25,18 @@ function GameAttributes({ game }: Props) {
       <AttributesBox title="Genres">
         <List.Root listStyle={"none"}>
           {game?.genres.map((genre) => (
-            <List.Item key={genre.id}>{genre.name}</List.Item>
+            <List.Item key={genre.id} fontSize={["sm", "md", "lg"]}>
+              {genre.name}
+            </List.Item>
           ))}
         </List.Root>
       </AttributesBox>
       <AttributesBox title="Publishers">
         <List.Root listStyle={"none"}>
           {game?.publishers.map((publisher) => (
-            <List.Item key={publisher.id}>{publisher.name}</List.Item>
+            <List.Item key={publisher.id} fontSize={["sm", "md", "lg"]}>
+              {publisher.name}
+            </List.Item>
           ))}
         </List.Root>
       </AttributesBox>

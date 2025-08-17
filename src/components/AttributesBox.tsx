@@ -9,7 +9,7 @@ interface Props {
 function AttributesBox<T>({ title, children }: Props) {
   return (
     <Box>
-      <Heading color={"gray.600"} fontSize={"md"}>
+      <Heading color={"gray.600"} fontSize={["md", "lg", "xl"]}>
         {title}
       </Heading>
       <dd>{children}</dd>

@@ -19,9 +19,15 @@ function GameDetailPage() {
   if (isLoading) return <GameDetailsSekeleton />;
   return (
     <>
-      <Heading>{data?.name}</Heading>
+      <Heading fontSize={["2xl", "3xl", "4xl", "5xl"]} paddingBottom={4}>
+        {data?.name}
+      </Heading>
       <ExpandableText text={data?.description_raw || ""} />
-      <Flex gap={8} align="flex-start">
+      <Flex
+        gap={[4, 6, 8]}
+        align="flex-start"
+        direction={["column", "column", "row"]}
+      >
         <Box flex="1">
           <GameAttributes game={data} />
         </Box>
