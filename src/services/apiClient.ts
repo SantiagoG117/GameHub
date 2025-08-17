@@ -31,7 +31,7 @@ class ApiClient<T> {
     return { request, cancel: () => controller.abort };
   }
 
-  getAllGames() {
+  getAll() {
     const controller = new AbortController(); //Built-in class in browsers that allows to cancel asynchronous operations like GET request
 
     const request = axiosInstance
@@ -43,18 +43,6 @@ class ApiClient<T> {
       .then((response) => response.data);
 
     //Return an object with two properties: The GET request promise and a cancel function
-    return { request, cancel: () => controller.abort };
-  }
-
-  getTrailer() {
-    const controller = new AbortController();
-
-    const request = axiosInstance
-      .get<FetchedData<T>>(this.endpoint, {
-        signal: controller.signal,
-      })
-      .then((response) => response.data);
-
     return { request, cancel: () => controller.abort };
   }
 }

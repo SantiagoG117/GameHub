@@ -1,8 +1,7 @@
 import { Games } from "@/entities/Games";
 import { Box, List, SimpleGrid } from "@chakra-ui/react";
-import AttributesBox from "./AttributesBox";
-import CriticScore from "./gameCard/CriticScore";
-import GameTrailer from "./GameTrailer";
+import AttributesBox from "../AttributesBox";
+import CriticScore from "../gameCard/CriticScore";
 
 interface Props {
   game: Games | undefined;

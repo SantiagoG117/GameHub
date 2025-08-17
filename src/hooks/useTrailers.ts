@@ -7,7 +7,7 @@ const useTrailers = (gameId: number | undefined) => {
   return useQuery<FetchedData<Trailers>, Error>({
     queryKey: ["trailers", gameId],
     queryFn: () =>
-      new ApiClient<Trailers>(`/games/${gameId}/movies`).getTrailer().request,
+      new ApiClient<Trailers>(`/games/${gameId}/movies`).getAll().request,
   });
 };
 

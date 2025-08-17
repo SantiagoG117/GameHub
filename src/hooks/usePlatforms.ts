@@ -12,7 +12,7 @@ import { Platforms } from "../entities/Platforms";
 const usePlatforms = () => {
   //API client responsible for making HTTP requests to the /genres endpoint and is dedicated to work with objects of type Genres
   const apiClient = new ApiClient<Platforms>("/platforms/lists/parents");
-  const { request } = apiClient.getAllGames();
+  const { request } = apiClient.getAll();
 
   //React query object: Provides auto-retries in case the call to the server fails, automtic refresh and caching
   //Generic types: <Type of data we are fetching, Type of Error>

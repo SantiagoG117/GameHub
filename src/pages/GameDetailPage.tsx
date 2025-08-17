@@ -1,16 +1,22 @@
 import ExpandableText from "@/components/ExpandableText";
-import GameAttributes from "@/components/GameAttributes";
-import GameTrailer from "@/components/GameTrailer";
+import GameAttributes from "@/components/gameDetails/GameAttributes";
+import GameDetailsSekeleton from "@/components/gameDetails/GameDetailsSekeleton";
+import GameMedia from "@/components/gameDetails/GameMedia";
 import useGame from "@/hooks/useGame";
-import { Box, Flex, Heading, Spinner } from "@chakra-ui/react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
+/* 
+  TODO:
+  ! Build Skeletons for Game Details page
+  ! Make the GameDetailPage responsive
+*/
+
 function GameDetailPage() {
-  //Extract params values from the URL
   const params = useParams();
   const { data, isLoading, error } = useGame(params.gameName);
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <GameDetailsSekeleton />;
   return (
     <>
       <Heading>{data?.name}</Heading>
@@ -20,7 +26,7 @@ function GameDetailPage() {
           <GameAttributes game={data} />
         </Box>
         <Box flex="1">
-          <GameTrailer game={data} />
+          <GameMedia gameId={data?.id} />
         </Box>
       </Flex>
     </>

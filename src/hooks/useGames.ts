@@ -35,7 +35,7 @@ const useGames = () => {
           _start: (pageParam - 1) * pageSize,
           _limit: pageSize,
         },
-      }).getAllGames().request,
+      }).getAll().request,
 
     /* 
       getNextPageParam() determines the next page number
