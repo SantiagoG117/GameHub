@@ -1,5 +1,6 @@
 import GameGrid from "@/components/gameGrid/GameGrid";
 import GameHeading from "@/components/gameGrid/GameHeading";
+import GenreHamburger from "@/components/gameGrid/GenreHamburger";
 import OrderBySelector from "@/components/gameGrid/OrderBySelector";
 import PlatformSelector from "@/components/gameGrid/PlatformSelector";
 import GenreList from "@/components/genreSideBar/GenreList";
@@ -15,6 +16,7 @@ import {
 function HomePage() {
   // hook that returns a boolean value based on the current screen size
   const isAboveLg = useBreakpointValue({ base: false, lg: true }); //Values for a screen bigger than 1024px
+  const isBelowLg = useBreakpointValue({ base: true, lg: false });
 
   return (
     <>
@@ -30,6 +32,7 @@ function HomePage() {
         }}
       >
         {/* Genre side bar */}
+        <GenreHamburger />
         <Show when={isAboveLg}>
           <GridItem area="aside" paddingX={5}>
             <GenreList />

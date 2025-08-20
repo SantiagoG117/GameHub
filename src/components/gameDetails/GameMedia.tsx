@@ -16,7 +16,6 @@ function GameMedia({ gameId }: Props) {
 
   //Loading skeleton
   const aspectRatio = 0.6;
-  const maxW = "600px";
   if (isLoadingScreenShots || isLoadingTrailer)
     return (
       <Box width="100%">

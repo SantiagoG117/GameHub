@@ -1,5 +1,5 @@
-import { Box, Input, InputGroup } from "@chakra-ui/react";
-import React, { useRef, useState } from "react";
+import { Input, InputGroup } from "@chakra-ui/react";
+import { useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 

@@ -4,12 +4,22 @@ import useGameQueryStore from "@/stateManagement/GameQueryStore";
 import { Button, Heading, HStack, Image, List } from "@chakra-ui/react";
 import GenreSkeleton from "./GenreSkeleton";
 
-function GenreList() {
+interface Props {
+  onClose?: () => void;
+}
+
+function GenreList({ onClose }: Props) {
   // Selector: Component will only be dependent on genreId and setSelectedGenre . Any other changes in the Global state won't cause a re-render
   const selectedGenreId = useGameQueryStore((s) => s.gameQuery.genreId);
   const setSelectedGenre = useGameQueryStore((s) => s.setSelectedGenre);
 
   const { data, isLoading, error } = useGenres();
+
+  const handleGenreClick = (genreId: number) => {
+    setSelectedGenre(genreId);
+    onClose?.();
+    
+  };
 
   const skeletons = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
@@ -19,7 +29,7 @@ function GenreList() {
 
   return (
     <>
-      <Heading fontSize="2xl" marginBottom={3}>
+      <Heading fontSize="2xl" marginBottom={3} paddingTop={[4, 3, 2]}>
         Genres
       </Heading>
       {isLoading && (
@@ -41,7 +51,7 @@ function GenreList() {
                 objectFit="cover"
               />
               <Button
-                onClick={() => setSelectedGenre(genre.id)}
+                onClick={() => handleGenreClick(genre.id)}
                 fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
                 color={genre.id === selectedGenreId ? "yellow.400" : undefined}
                 variant="ghost"

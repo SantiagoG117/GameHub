@@ -2,6 +2,7 @@ import ExpandableText from "@/components/ExpandableText";
 import GameAttributes from "@/components/gameDetails/GameAttributes";
 import GameDetailsSekeleton from "@/components/gameDetails/GameDetailsSekeleton";
 import GameMedia from "@/components/gameDetails/GameMedia";
+import GenreHamburger from "@/components/gameGrid/GenreHamburger";
 import useGame from "@/hooks/useGame";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
