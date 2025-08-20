@@ -1,6 +1,5 @@
 import GameGrid from "@/components/gameGrid/GameGrid";
 import GameHeading from "@/components/gameGrid/GameHeading";
-import GenreHamburger from "@/components/gameGrid/GenreHamburger";
 import OrderBySelector from "@/components/gameGrid/OrderBySelector";
 import PlatformSelector from "@/components/gameGrid/PlatformSelector";
 import GenreList from "@/components/genreSideBar/GenreList";
@@ -32,7 +31,6 @@ function HomePage() {
         }}
       >
         {/* Genre side bar */}
-        <GenreHamburger />
         <Show when={isAboveLg}>
           <GridItem area="aside" paddingX={5}>
             <GenreList />
