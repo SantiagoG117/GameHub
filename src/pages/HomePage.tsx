@@ -15,7 +15,6 @@ import {
 function HomePage() {
   // hook that returns a boolean value based on the current screen size
   const isAboveLg = useBreakpointValue({ base: false, lg: true }); //Values for a screen bigger than 1024px
-  const isBelowLg = useBreakpointValue({ base: true, lg: false });
 
   return (
     <>

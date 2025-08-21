@@ -1,12 +1,14 @@
-import { Drawer, IconButton, Portal, useDisclosure } from "@chakra-ui/react";
-import { FaBars } from "react-icons/fa";
-import GenreList from "../genreSideBar/GenreList";
+import { Drawer, IconButton, Portal } from "@chakra-ui/react";
 import { useState } from "react";
+import { FaBars } from "react-icons/fa";
+import { Navigate } from "react-router-dom";
+import GenreList from "../genreSideBar/GenreList";
 
 function GenreHamburger() {
   const [isOpen, setIsOpen] = useState(false);
-  //Share state with GenreList if needed
-  const handleClose = () => setIsOpen(false);
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   return (
     <>

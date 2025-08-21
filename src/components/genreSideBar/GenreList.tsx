@@ -3,6 +3,7 @@ import getCroppedImageUrl from "@/services/image-url";
 import useGameQueryStore from "@/stateManagement/GameQueryStore";
 import { Button, Heading, HStack, Image, List } from "@chakra-ui/react";
 import GenreSkeleton from "./GenreSkeleton";
+import { Navigate, useNavigate } from "react-router-dom";
 
 interface Props {
   onClose?: () => void;
@@ -12,13 +13,13 @@ function GenreList({ onClose }: Props) {
   // Selector: Component will only be dependent on genreId and setSelectedGenre . Any other changes in the Global state won't cause a re-render
   const selectedGenreId = useGameQueryStore((s) => s.gameQuery.genreId);
   const setSelectedGenre = useGameQueryStore((s) => s.setSelectedGenre);
-
   const { data, isLoading, error } = useGenres();
+  const navigate = useNavigate();
 
   const handleGenreClick = (genreId: number) => {
     setSelectedGenre(genreId);
     onClose?.();
-    
+    navigate("/");
   };
 
   const skeletons = [
@@ -57,9 +58,9 @@ function GenreList({ onClose }: Props) {
                 variant="ghost"
                 fontSize="lg"
                 padding={1}
-                whiteSpace="normal" // Allow text to wrap
-                textAlign="left" // Align text to the left
-                maxWidth="150px" // Limit the width to ensure wrapping
+                whiteSpace="normal"
+                textAlign="left"
+                maxWidth="150px"
               >
                 {genre.name}
               </Button>
