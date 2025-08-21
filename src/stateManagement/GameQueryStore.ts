@@ -27,12 +27,13 @@ interface GameQueryStore {
   setSelectedGenre: (genreId: number) => void;
   setSelectedPlatform: (platformId: number) => void;
   setSortOrder: (sortOrder: { value: string; label: string }) => void;
+  resetState: () => void;
 }
 
 //? Create Store Hook to manage the global state
 const useGameQueryStore = create<GameQueryStore>((set) => ({
   //Initial State:
-  gameQuery: {}, 
+  gameQuery: {},
 
   //Actions:
   // set(store =({})) updates the state in the store. It takes a function that receives the current state (store) and returns the new updated state
@@ -49,10 +50,14 @@ const useGameQueryStore = create<GameQueryStore>((set) => ({
     set((store) => ({
       gameQuery: { ...store.gameQuery, platformId: selectedPlatformId },
     })),
-    
+
   setSortOrder: (selectedSortOrder) =>
     set((store) => ({
       gameQuery: { ...store.gameQuery, sortOrder: selectedSortOrder },
+    })),
+  resetState: () =>
+    set(() => ({
+      gameQuery: {},
     })),
 }));
 
